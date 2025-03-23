@@ -15,12 +15,12 @@ import java.util.Map;
 @Service
 public class JasperReportService {
 
-    public static final String CERTIFICADOS = "classpath:jasper/certificados";
-    public static final String IMAGEBG = "classpath:jasper/jasper-img.png";
+    public static final String CERTIFICADOS = "classpath:jasper/certificados/";
+    public static final String IMAGEBG = "classpath:jasper/img/jasper-img.png";
     public static final String ARQUIVOJRXML = "cert.jrxml";
     public static final Logger LOGGER = LoggerFactory.getLogger(JasperReportService.class);
 
-    public static final String DESTINOPDF = "/Users/joaosouza/Documents";
+    public static final String DESTINOPDF = "C:\\jasper-report\\";
 
     public void gerar(Aluno aluno) throws IOException {
 
@@ -60,7 +60,7 @@ public class JasperReportService {
     }
 
     private String getDiretorioSave(String name) {
-        this.createDiretorio(name);
+        this.createDiretorio(DESTINOPDF);
         return DESTINOPDF+name.concat(".pdf");
     }
 
