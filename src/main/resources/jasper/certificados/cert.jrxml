@@ -34,8 +34,17 @@
 			<element kind="textField" uuid="a1328591-5cbd-4aea-86fd-3a63c4c38704" x="151" y="220" width="540" height="30" fontSize="19.0" hTextAlign="Center">
 				<expression><![CDATA[$P{nome}]]></expression>
 			</element>
-			<element kind="textField" uuid="033e49a8-a12f-4009-a7d4-6712e0c04394" x="151" y="342" width="540" height="128" fontSize="16.0">
-				<expression><![CDATA["Concluiu com êxito o curso de " + $P{curso} + ", totalizando " + $P{cargaHoraria} + " horas de estudo. Este curso teve início em " + $P{dataInicioCurso} + " e encerrou-se em " + $P{dataTerminoCurso} + "."]]></expression>
+			<element kind="textField" uuid="033e49a8-a12f-4009-a7d4-6712e0c04394" x="151" y="342" width="540" height="128" fontSize="16.0" pattern="dd.MMM.yyyy">
+				<expression><![CDATA["Concluiu com êxito o curso de " + $P{curso} + ", totalizando " + $P{cargaHoraria} + " horas de estudo. Este curso teve início em                       e encerrou-se em "]]></expression>
+			</element>
+			<element kind="textField" uuid="62d0c802-713b-42b7-b175-fa1650e8e1f5" x="151" y="380" width="176" height="24" fontSize="16.0" pattern="dd.MMMyyyy">
+				<expression><![CDATA[$P{dataTerminoCurso}]]></expression>
+			</element>
+			<element kind="textField" uuid="33792c76-d59e-4da1-b83d-4781b018ecf3" x="393" y="361" width="159" height="19" fontSize="16.0" pattern="dd.MMMyyy">
+				<expression><![CDATA[$P{dataInicioCurso}]]></expression>
+			</element>
+			<element kind="textField" uuid="15aced39-fe91-4300-8951-db2bab6acc85" x="240" y="380" width="15" height="20" fontSize="16.0">
+				<expression><![CDATA["."]]></expression>
 			</element>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 		</band>
