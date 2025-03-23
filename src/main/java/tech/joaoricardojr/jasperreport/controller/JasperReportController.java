@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.joaoricardojr.jasperreport.model.Aluno;
 import tech.joaoricardojr.jasperreport.service.JasperReportService;
 
+import java.io.FileNotFoundException;
+
 @RestController
 @RequestMapping("/jasper-report")
 public class JasperReportController {
@@ -18,7 +20,7 @@ public class JasperReportController {
     }
 
     @PostMapping("/gerar-certificado")
-    public void gerar(@RequestBody Aluno aluno){
+    public void gerar(@RequestBody Aluno aluno) throws FileNotFoundException {
         this.jasperReportService.gerar(aluno);
     }
 }

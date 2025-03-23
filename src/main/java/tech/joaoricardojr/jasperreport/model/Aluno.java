@@ -11,12 +11,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class Aluno {
     private String nome;
-
     private String curso;
-
     private Integer cargaHoraria;
-
     private Date dataInicioCurso;
-
     private Date dataTerminoCurso;
 }
