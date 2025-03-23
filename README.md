@@ -1,7 +1,6 @@
 ## Descrição
 
-Este projeto foi desenvolvido durante meus estudos sobre o JasperReports. Para mais detalhes, você pode assistir ao <a href="https://www.youtube.com/watch?v=fXBNDIe5fCU&t=521s" target="_blank">vídeo de referência</a>. Utilizando JasperReports, é possível gerar um modelo de certificado de conclusão de curso em PDF.
-
+Este projeto foi desenvolvido durante meus estudos sobre o JasperReports. Para mais detalhes, você pode assistir ao <a href="https://www.youtube.com/watch?v=fXBNDIe5fCU&t=521s" target="_blank">vídeo de referência</a>.
 ## Funcionalidades
 
 - **Geração de Certificado PDF**: Criação de certificado em formato PDF.
