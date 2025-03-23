@@ -1,14 +1,14 @@
 package tech.joaoricardojr.jasperreport.service;
 
 import net.sf.jasperreports.engine.*;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 import tech.joaoricardojr.jasperreport.model.Aluno;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +22,9 @@ public class JasperReportService {
 
     public static final String DESTINOPDF = "/Users/joaosouza/Documents";
 
-    public void gerar(Aluno aluno) throws FileNotFoundException {
+    public void gerar(Aluno aluno) throws IOException {
+
+        byte[] imagebg = this.loadimage(IMAGEBG);
 
         Map<String, Object> params = new HashMap<>();
         params.put("nome", aluno.getNome());
@@ -30,6 +32,7 @@ public class JasperReportService {
         params.put("cargaHoraria", aluno.getCargaHoraria());
         params.put("dataInicioCurso", aluno.getDataInicioCurso());
         params.put("dataTerminoCurso", aluno.getDataTerminoCurso());
+        params.put("imageJasper", imagebg);
 
         String pathAbsoluto = getAbsolutePath();
 
@@ -40,9 +43,19 @@ public class JasperReportService {
             JasperPrint print = JasperFillManager.fillReport(report, params, new JREmptyDataSource());
             LOGGER.info("jasper print");
             JasperExportManager.exportReportToPdfFile(print, folderDiretorio);
+            LOGGER.info("PDF EXPORTADO PARA: {}", folderDiretorio);
 
         } catch (JRException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private byte[] loadimage(String imagebg) throws IOException {
+        String image = ResourceUtils.getFile(imagebg).getAbsolutePath();
+        File file = new File(image);
+        try(InputStream inputStream = new FileInputStream(file)){
+            return IOUtils.toByteArray(inputStream);
+
         }
     }
 

@@ -8,6 +8,7 @@ import tech.joaoricardojr.jasperreport.model.Aluno;
 import tech.joaoricardojr.jasperreport.service.JasperReportService;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/jasper-report")
@@ -20,7 +21,7 @@ public class JasperReportController {
     }
 
     @PostMapping("/gerar-certificado")
-    public void gerar(@RequestBody Aluno aluno) throws FileNotFoundException {
+    public void gerar(@RequestBody Aluno aluno) throws IOException {
         this.jasperReportService.gerar(aluno);
     }
 }
