@@ -1,14 +1,13 @@
 package tech.joaoricardojr.jasperreport.service;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 import tech.joaoricardojr.jasperreport.model.Aluno;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,8 +16,11 @@ import java.util.Map;
 public class JasperReportService {
 
     public static final String CERTIFICADOS = "classpath:jasper/certificados";
+    public static final String IMAGEBG = "classpath:jasper/jasper-img.png";
     public static final String ARQUIVOJRXML = "cert.jrxml";
     public static final Logger LOGGER = LoggerFactory.getLogger(JasperReportService.class);
+
+    public static final String DESTINOPDF = "/Users/joaosouza/Documents";
 
     public void gerar(Aluno aluno) throws FileNotFoundException {
 
@@ -32,9 +34,27 @@ public class JasperReportService {
         String pathAbsoluto = getAbsolutePath();
 
         try{
+            String folderDiretorio = getDiretorioSave("certificados-salvos");
             JasperReport report = JasperCompileManager.compileReport(pathAbsoluto);
+            LOGGER.info("report compilado {} ", pathAbsoluto );
+            JasperPrint print = JasperFillManager.fillReport(report, params, new JREmptyDataSource());
+            LOGGER.info("jasper print");
+            JasperExportManager.exportReportToPdfFile(print, folderDiretorio);
+
         } catch (JRException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private String getDiretorioSave(String name) {
+        this.createDiretorio(name);
+        return DESTINOPDF+name.concat(".pdf");
+    }
+
+    private void createDiretorio(String name) {
+        File dir = new File(name);
+        if(!dir.exists()) {
+            dir.mkdir();
         }
     }
 
